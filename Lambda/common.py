@@ -104,7 +104,7 @@ def get_weather_forecast(api_key:str,q:str,days:int,lang:str,logger:Logger)->dic
         "hourly": df_hourly
     }
 
-def create_misskey_note(address:str,access_token:str,text:str,logger:Logger)->str:
+def create_misskey_note(address:str,access_token:str,text:str,visibility:str,logger:Logger)->str:
     """
     Misskeyにノートを作成する
 
@@ -116,6 +116,8 @@ def create_misskey_note(address:str,access_token:str,text:str,logger:Logger)->st
         Misskeyのアクセストークン
     text: str
         ノートの内容
+    visibility: str
+        ノートの公開範囲
     logger: Logger
         ロガー
 
@@ -128,7 +130,7 @@ def create_misskey_note(address:str,access_token:str,text:str,logger:Logger)->st
     note_id=""
     try:
         mk=Misskey(address=address,i=access_token)
-        note=mk.notes_create(text=text)
+        note=mk.notes_create(text=text,visibility=visibility)
         note_id=note["createdNote"]["id"]
     except Exception as e:
         logger.error(f"Misskeyのノート作成に失敗しました: {e}")

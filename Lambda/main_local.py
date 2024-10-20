@@ -52,7 +52,7 @@ def main(args):
         f"{condition}\n"
         f"{avgtemp_c}℃ (平均) / {mintemp_c}℃ (最低) / {maxtemp_c}℃ (最高)"
     )
-    note_id=create_misskey_note(misskey_server_url,misskey_access_token,text,logger)
+    note_id=create_misskey_note(misskey_server_url,misskey_access_token,text,"specified",logger)
     logger.info(f"ノートのID: {note_id}")
 
 if __name__=="__main__":
