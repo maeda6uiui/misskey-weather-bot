@@ -23,6 +23,7 @@ def get_weather_forecast(api_key:str,q:str,days:int,lang:str,logger:Logger)->dic
     Returns
     ----------
     dict[str,DataFrame]
+        location: 位置データ
         daily: 1日ごとのデータ
         hourly: 1時間ごとのデータ
     """
@@ -42,6 +43,14 @@ def get_weather_forecast(api_key:str,q:str,days:int,lang:str,logger:Logger)->dic
         return None
     
     data=response.json()
+
+    location=data["location"]
+    data_location={
+        "name": location["name"],
+        "region": location["region"],
+        "country": location["country"]
+    }
+    df_location=pd.DataFrame(data_location)
 
     data_daily={
         "date": [],
@@ -90,6 +99,7 @@ def get_weather_forecast(api_key:str,q:str,days:int,lang:str,logger:Logger)->dic
     df_hourly=pd.DataFrame(data_hourly)
 
     return {
+        "location": df_location,
         "daily": df_daily,
         "hourly": df_hourly
     }

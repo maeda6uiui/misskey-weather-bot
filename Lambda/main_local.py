@@ -31,6 +31,7 @@ def main(args):
         logger.error("天気予報の取得に失敗しました")
         return
 
+    df_location=dfs["location"]
     df_daily=dfs["daily"]
     df_hourly=dfs["hourly"]
     
@@ -38,6 +39,8 @@ def main(args):
     logger.debug(df_hourly)
 
     #天気予報をMisskeyに投稿する
+    location_name=df_location["name"].item()
+
     date=df_daily["date"].item()
     condition=df_daily["condition"].item()
     avgtemp_c=df_daily["avgtemp_c"].item()
@@ -45,7 +48,7 @@ def main(args):
     maxtemp_c=df_daily["maxtemp_c"].item()
 
     text=(
-        f"{date}の天気予報\n\n"
+        f"{date}の{location_name}の天気予報\n\n"
         f"{condition}\n"
         f"{avgtemp_c}℃ (平均) / {mintemp_c}℃ (最低) / {maxtemp_c}℃ (最高)"
     )
