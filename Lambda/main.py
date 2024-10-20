@@ -10,7 +10,7 @@ FORECAST_QUERY_PARAM=os.environ["FORECAST_QUERY_PARAM"]
 MISSKEY_SERVER_URL=os.environ["MISSKEY_SERVER_URL"]
 MISSKEY_ACCESS_TOKEN=os.environ["MISSKEY_ACCESS_TOKEN"]
 
-def main():
+def lambda_handler():
     #ログファイルを保存するディレクトリを作成する
     logging_dir=Path("./Log")
     logging_dir.mkdir(exist_ok=True)
