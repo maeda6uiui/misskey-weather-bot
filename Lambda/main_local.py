@@ -24,9 +24,11 @@ def main(args):
 
     #天気予報を取得する
     dfs=get_weather_forecast(weather_api_key,forecast_query_param,forecast_days,logger)
+    df_daily=dfs["daily"]
+    df_hourly=dfs["hourly"]
     
-    logger.info(dfs["daily"])
-    logger.info(dfs["hourly"])
+    logger.debug(df_daily)
+    logger.debug(df_hourly)
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
