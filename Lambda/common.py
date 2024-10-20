@@ -2,13 +2,13 @@ import pandas as pd
 import requests
 from logging import Logger
 
-def get_weather_forecast(key:str,q:str,days:int,logger:Logger)->dict[str,pd.DataFrame]:
+def get_weather_forecast(api_key:str,q:str,days:int,logger:Logger)->dict[str,pd.DataFrame]:
     """
     天気予報のデータを取得する
 
     Parameters
     ----------
-    key: str
+    api_key: str
         Weather APIのAPIキー
     q: str
         クエリパラメータ
@@ -26,7 +26,7 @@ def get_weather_forecast(key:str,q:str,days:int,logger:Logger)->dict[str,pd.Data
     response=requests.get(
         "https://api.weatherapi.com/v1/forecast.json",
         headers={
-            "key": key
+            "key": api_key
         },
         params={
             "q": q,

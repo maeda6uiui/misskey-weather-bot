@@ -32,7 +32,7 @@ def main(args):
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
-    parser.add_argument("-k","--weather-api-key",type=str)
+    parser.add_argument("-wk","--weather-api-key",type=str)
     parser.add_argument("-q","--forecast-query-param",type=str,default="Tokyo")
     parser.add_argument("-d","--forecast-days",type=int,default=1)
     args=parser.parse_args()
