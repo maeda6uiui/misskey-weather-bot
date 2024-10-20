@@ -46,9 +46,9 @@ def get_weather_forecast(api_key:str,q:str,days:int,lang:str,logger:Logger)->dic
 
     location=data["location"]
     data_location={
-        "name": location["name"],
-        "region": location["region"],
-        "country": location["country"]
+        "name": [location["name"]],
+        "region": [location["region"]],
+        "country": [location["country"]]
     }
     df_location=pd.DataFrame(data_location)
 
