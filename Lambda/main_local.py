@@ -10,6 +10,7 @@ def main(args):
     weather_api_key:str=args.weather_api_key
     forecast_query_param:str=args.forecast_query_param
     forecast_days:int=args.forecast_days
+    forecast_language:str=args.forecast_language
     misskey_server_url:str=args.misskey_server_url
     misskey_access_token:str=args.misskey_access_token
 
@@ -25,7 +26,7 @@ def main(args):
     logger=getLogger(__name__)
 
     #天気予報を取得する
-    dfs=get_weather_forecast(weather_api_key,forecast_query_param,forecast_days,logger)
+    dfs=get_weather_forecast(weather_api_key,forecast_query_param,forecast_days,forecast_language,logger)
     if dfs is None:
         logger.error("天気予報の取得に失敗しました")
         return
@@ -56,6 +57,7 @@ if __name__=="__main__":
     parser.add_argument("-wk","--weather-api-key",type=str)
     parser.add_argument("-q","--forecast-query-param",type=str,default="Tokyo")
     parser.add_argument("-d","--forecast-days",type=int,default=1)
+    parser.add_argument("-l","--forecast-language",type=str,default="ja")
     parser.add_argument("-u","--misskey-server-url",type=str)
     parser.add_argument("-mk","--misskey-access-token",type=str)
     args=parser.parse_args()

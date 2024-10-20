@@ -3,7 +3,7 @@ import requests
 from logging import Logger
 from misskey import Misskey
 
-def get_weather_forecast(api_key:str,q:str,days:int,logger:Logger)->dict[str,pd.DataFrame]:
+def get_weather_forecast(api_key:str,q:str,days:int,lang:str,logger:Logger)->dict[str,pd.DataFrame]:
     """
     天気予報のデータを取得する
 
@@ -15,6 +15,8 @@ def get_weather_forecast(api_key:str,q:str,days:int,logger:Logger)->dict[str,pd.
         クエリパラメータ
     days: int
         天気予報を取得する日数
+    lang: str
+        天気予報の言語
     logger: Logger
         ロガー
 
@@ -31,7 +33,8 @@ def get_weather_forecast(api_key:str,q:str,days:int,logger:Logger)->dict[str,pd.
         },
         params={
             "q": q,
-            "days": days
+            "days": days,
+            "lang": lang
         }
     )
     if response.status_code!=200:
