@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 from logging import Logger
+from misskey import Misskey
 
 def get_weather_forecast(api_key:str,q:str,days:int,logger:Logger)->dict[str,pd.DataFrame]:
     """
@@ -89,3 +90,34 @@ def get_weather_forecast(api_key:str,q:str,days:int,logger:Logger)->dict[str,pd.
         "daily": df_daily,
         "hourly": df_hourly
     }
+
+def create_misskey_note(address:str,access_token:str,text:str,logger:Logger)->str:
+    """
+    Misskeyにノートを作成する
+
+    Parameters:
+    ----------
+    address: str
+        MisskeyサーバーのURL
+    access_token: str
+        Misskeyのアクセストークン
+    text: str
+        ノートの内容
+    logger: Logger
+        ロガー
+
+    Returns
+    ----------
+    str
+        作成されたノートのID
+        エラーが発生した場合は空文字列が返される
+    """
+    note_id=""
+    try:
+        mk=Misskey(address=address,i=access_token)
+        note=mk.notes_create(text=text)
+        note_id=note["createdNote"]["id"]
+    except Exception as e:
+        logger.error(f"Misskeyのノート作成に失敗しました: {e}")
+
+    return note_id
