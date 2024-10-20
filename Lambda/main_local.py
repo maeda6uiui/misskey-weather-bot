@@ -53,7 +53,20 @@ def main(args):
         f"{avgtemp_c}℃ (平均) / {mintemp_c}℃ (最低) / {maxtemp_c}℃ (最高)"
     )
     note_id=create_misskey_note(misskey_server_url,misskey_access_token,text,"specified",logger)
-    logger.info(f"ノートのID: {note_id}")
+    logger.info(f"ノートのID (1日): {note_id}")
+
+    text=f"{date}の{location_name}の天気予報(1時間ごと)\n\n"
+    for _,row in df_hourly.iterrows():
+        time:str=row["time"]
+        time=time.split(" ")[1]
+
+        temp_c=row["temp_c"]
+        condition=row["condition"]
+
+        text+=f"{time} / {temp_c}℃ / {condition}\n"
+
+    note_id=create_misskey_note(misskey_server_url,misskey_access_token,text,"specified",logger)
+    logger.info(f"ノートのID (1時間ごと): {note_id}")
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
