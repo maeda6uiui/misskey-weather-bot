@@ -148,6 +148,31 @@ class WeatherForecastPoster(object):
 
         return note_id
     
+    def _get_condition_emoji(self,condition:str)->str:
+        """
+        天気を表す絵文字を返す
+
+        Parameters
+        ----------
+        condition: str
+            天気を表す文字列
+
+        Returns
+        ----------
+        str
+            天気を表す絵文字
+        """
+        if "晴" in condition:
+           return "☀"
+        elif "曇" in condition:
+            return "☁"
+        elif "雨" in condition:
+            return "☂"
+        elif "雪" in condition:
+            return "❄"
+        
+        return ""
+    
     def post_weather_forecast(self,q:str,visibility:str="public"):
         """
         天気予報をMisskeyに投稿する
@@ -179,7 +204,7 @@ class WeatherForecastPoster(object):
 
         text=(
             f"{date}の{location_name}の天気予報\n\n"
-            f"{condition}\n"
+            f"{self._get_condition_emoji(condition)+condition}\n"
             f"{avgtemp_c}℃ (平均) / {mintemp_c}℃ (最低) / {maxtemp_c}℃ (最高)"
         )
         note_id=self._create_misskey_note(text,visibility)
@@ -193,7 +218,7 @@ class WeatherForecastPoster(object):
             temp_c=row["temp_c"]
             condition=row["condition"]
 
-            text+=f"{time} / {temp_c}℃ / {condition}\n"
+            text+=f"{time} / {temp_c}℃ / {self._get_condition_emoji(condition)+condition}\n"
 
         note_id=self._create_misskey_note(text,visibility)
         self._logger.info(f"ノートID (1時間ごとの天気予報): {note_id}")
