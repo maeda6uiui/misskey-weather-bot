@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - Lambda/**
   workflow_dispatch:
 
 permissions:
