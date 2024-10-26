@@ -9,4 +9,11 @@ resource "aws_lambda_function" "main" {
 
   timeout     = var.lambda_config.timeout
   memory_size = var.lambda_config.memory_size
+
+  lifecycle {
+    ignore_changes = [
+      image_uri,
+      environment
+    ]
+  }
 }
