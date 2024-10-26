@@ -13,6 +13,7 @@ module "misskey_weather_bot" {
     timeout     = 15
     memory_size = 128
   }
+  schedule_expression = "cron(0 22 * * ? *)"
 }
 
 module "github_actions" {
