@@ -4,11 +4,21 @@ module "ecr" {
   aws = var.aws
 }
 
+module "cloudwatch" {
+  source = "./cloudwatch"
+
+  name_prefix = var.name_prefix
+  env = var.env
+}
+
 module "iam" {
   source = "./iam"
 
   name_prefix = var.name_prefix
   env         = var.env
+  aws = var.aws
+
+  cloudwatch_log_group_arn = module.cloudwatch.log_group.main.arn
 }
 
 module "lambda" {
