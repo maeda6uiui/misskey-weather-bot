@@ -1,5 +1,7 @@
 module "ecr" {
   source = "./ecr"
+  
+  aws = var.aws
 }
 
 module "iam" {
