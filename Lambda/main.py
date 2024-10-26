@@ -1,6 +1,6 @@
+import logging
 import os
-import yaml
-from logging import getLogger, config
+from logging import getLogger
 
 from common import WeatherForecastPoster
 
@@ -9,15 +9,11 @@ FORECAST_QUERY_PARAM = os.environ["FORECAST_QUERY_PARAM"]
 MISSKEY_SERVER_URL = os.environ["MISSKEY_SERVER_URL"]
 MISSKEY_ACCESS_TOKEN = os.environ["MISSKEY_ACCESS_TOKEN"]
 
+logger = getLogger(__name__)
+logger.setLevel(logging.INFO)
+
 
 def lambda_handler(event, context):
-    # ロガーをセットアップする
-    with open("./logging_config.yaml", "r", encoding="utf-8") as r:
-        logging_config = yaml.safe_load(r)
-
-    config.dictConfig(logging_config)
-    logger = getLogger(__name__)
-
     # Misskeyに天気予報を投稿する
     wfp = WeatherForecastPoster(
         WEATHER_API_KEY, MISSKEY_SERVER_URL, MISSKEY_ACCESS_TOKEN, logger=logger
