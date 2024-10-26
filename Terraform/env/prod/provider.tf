@@ -17,4 +17,12 @@ terraform {
 
 provider "aws" {
   region = "ap-northeast-1"
+
+  default_tags {
+    tags = {
+      Service=local.service
+      Env=local.env
+      ManagedBy=local.managed_by
+    }
+  }
 }
