@@ -8,19 +8,19 @@ variable "env" {
 
 variable "github_info" {
   type = object({
-    username = string
-    repo_name=string
+    username  = string
+    repo_name = string
   })
 }
 
 variable "misskey_weather_bot" {
   type = object({
     ecr = object({
-      main=object({
+      main = object({
         arn = string
       })
     })
-    lambda=object({
+    lambda = object({
       main = object({
         arn = string
       })

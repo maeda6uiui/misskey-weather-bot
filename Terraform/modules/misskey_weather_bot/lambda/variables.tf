@@ -8,8 +8,8 @@ variable "env" {
 
 variable "lambda_config" {
   type = object({
-    timeout = number
-    memory_size=number
+    timeout     = number
+    memory_size = number
   })
 }
 

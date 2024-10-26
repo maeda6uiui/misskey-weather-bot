@@ -4,12 +4,12 @@ terraform {
       source  = "hashicorp/aws"
       version = "~>5.0"
     }
-    tls={
-      source = "hashicorp/tls"
+    tls = {
+      source  = "hashicorp/tls"
       version = "~>4.0"
     }
-    null={
-      source = "hashicorp/null"
+    null = {
+      source  = "hashicorp/null"
       version = "~>3.0"
     }
   }
@@ -28,9 +28,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Service=local.service
-      Env=local.env
-      ManagedBy=local.managed_by
+      Service   = local.service
+      Env       = local.env
+      ManagedBy = local.managed_by
     }
   }
 }
