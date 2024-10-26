@@ -1,0 +1,16 @@
+name: Deploy Lambda to prod environment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-lambda.yml
+    with:
+      lambdaFunctionName: misskey-weather-bot-lambda-prod
+      ecrRepoName: lambda/misskey-weather-bot
+    secrets:
+      awsDeploymentRoleArn: ${{secrets.AWS_DEPLOYMENT_ROLE_ARN_PROD}}
