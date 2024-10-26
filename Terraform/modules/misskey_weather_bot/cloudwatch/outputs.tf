@@ -1,5 +1,7 @@
-output "main" {
+output "log_group" {
   value={
-    arn=aws_cloudwatch_log_group.main.arn
+    main={
+        arn=aws_cloudwatch_log_group.main.arn
+    }
   }
 }
