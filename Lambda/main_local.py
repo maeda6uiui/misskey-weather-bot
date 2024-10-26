@@ -1,7 +1,6 @@
 import argparse
 import yaml
 from logging import getLogger, config
-from pathlib import Path
 
 from common import WeatherForecastPoster
 
@@ -12,10 +11,6 @@ def main(args):
     forecast_query_param: str = args.forecast_query_param
     misskey_server_url: str = args.misskey_server_url
     misskey_access_token: str = args.misskey_access_token
-
-    # ログファイルを保存するディレクトリを作成する
-    logging_dir = Path("./Log")
-    logging_dir.mkdir(exist_ok=True)
 
     # ロガーをセットアップする
     with open("./logging_config.yaml", "r", encoding="utf-8") as r:

@@ -1,7 +1,6 @@
 import os
 import yaml
 from logging import getLogger, config
-from pathlib import Path
 
 from common import WeatherForecastPoster
 
@@ -12,10 +11,6 @@ MISSKEY_ACCESS_TOKEN = os.environ["MISSKEY_ACCESS_TOKEN"]
 
 
 def lambda_handler(event, context):
-    # ログファイルを保存するディレクトリを作成する
-    logging_dir = Path("./Log")
-    logging_dir.mkdir(exist_ok=True)
-
     # ロガーをセットアップする
     with open("./logging_config.yaml", "r", encoding="utf-8") as r:
         logging_config = yaml.safe_load(r)
