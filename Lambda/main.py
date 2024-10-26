@@ -19,6 +19,6 @@ def lambda_handler(event, context):
         WEATHER_API_KEY, MISSKEY_SERVER_URL, MISSKEY_ACCESS_TOKEN, logger=logger
     )
     try:
-        wfp.post_weather_forecast(FORECAST_QUERY_PARAM, visibility="specified")
+        wfp.post_weather_forecast(FORECAST_QUERY_PARAM)
     except Exception as e:
         logger.error(f"処理中にエラーが発生しました: {e}")
