@@ -19,3 +19,7 @@ variable "lambda_config" {
     memory_size = number
   })
 }
+
+variable "schedule_expression" {
+  type = string
+}

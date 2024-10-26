@@ -32,3 +32,13 @@ module "lambda" {
   repository_url  = module.ecr.main.repository_url
   lambda_role_arn = module.iam.role.lambda.arn
 }
+
+module "eventbridge" {
+  source = "./eventbridge"
+
+  name_prefix = var.name_prefix
+
+  lambda_arn = module.lambda.main.arn
+  lambda_name = module.lambda.main.function_name
+  schedule_expression = var.schedule_expression
+}
