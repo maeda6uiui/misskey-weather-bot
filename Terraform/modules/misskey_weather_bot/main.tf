@@ -8,7 +8,7 @@ module "cloudwatch" {
   source = "./cloudwatch"
 
   name_prefix = var.name_prefix
-  env = var.env
+  env         = var.env
 }
 
 module "iam" {
@@ -16,7 +16,7 @@ module "iam" {
 
   name_prefix = var.name_prefix
   env         = var.env
-  aws = var.aws
+  aws         = var.aws
 
   cloudwatch_log_group_arn = module.cloudwatch.log_group.main.arn
 }
@@ -38,7 +38,7 @@ module "eventbridge" {
 
   name_prefix = var.name_prefix
 
-  lambda_arn = module.lambda.main.arn
-  lambda_name = module.lambda.main.function_name
+  lambda_arn          = module.lambda.main.arn
+  lambda_name         = module.lambda.main.function_name
   schedule_expression = var.schedule_expression
 }
