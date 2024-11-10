@@ -3,10 +3,10 @@ resource "aws_ecr_repository" "main" {
   image_tag_mutability = "IMMUTABLE"
 }
 
-resource "null_resource" "main" {
-  triggers = {
-    repository_arn = aws_ecr_repository.main.arn
-  }
+resource "terraform_data" "main" {
+  triggers_replace = [
+    aws_ecr_repository.main.arn
+  ]
 
   provisioner "local-exec" {
     command = "bash ${path.module}/push_temp_image.sh"
