@@ -1,5 +1,9 @@
-data "tls_certificate" "github_actions" {
+data "http" "github_actions" {
   url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
+}
+
+data "tls_certificate" "github_actions" {
+  url = jsondecode(data.http.github_actions.response_body).jwks_uri
 }
 
 resource "aws_iam_openid_connect_provider" "github_actions" {
