@@ -12,8 +12,12 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
   thumbprint_list = [data.tls_certificate.github_actions.certificates[0].sha1_fingerprint]
 }
 
+resource "random_id" "rnd" {
+  byte_length = 4
+}
+
 resource "aws_iam_role" "github_actions" {
-  name = "${var.name_prefix}-github-actions-${var.env}"
+  name = "${var.name_prefix}-github-actions-${var.env}-${random_id.rnd.hex}"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
